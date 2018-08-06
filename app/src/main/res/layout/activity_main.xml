@@ -6,11 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:src="@drawable/bg_frog"
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <!--Content of Fragment-->
     <FrameLayout
