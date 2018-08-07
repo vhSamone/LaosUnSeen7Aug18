@@ -5,19 +5,16 @@
 
     <!--Content-->
     <LinearLayout
+        android:background="@drawable/bg_login"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--Logo-->
-        <ImageView
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
 
         <!--User-->
         <EditText
-
+            android:background="@drawable/textfield_email"
             android:hint="Email :"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
@@ -25,7 +22,7 @@
 
         <!--Password-->
         <EditText
-
+            android:background="@drawable/textfield_password"
             android:hint="Password :"
             android:inputType="textPassword"
             android:layout_width="match_parent"
@@ -33,7 +30,7 @@
 
         <!--Login-->
         <Button
-
+            android:background="@drawable/bg_button"
             android:text="Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
