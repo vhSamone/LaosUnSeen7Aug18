@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import masterung.androidthai.in.th.laosunseen.MainActivity;
 import masterung.androidthai.in.th.laosunseen.R;
+import masterung.androidthai.in.th.laosunseen.utility.MyAlert;
 
 public class RegisterFragment extends Fragment {
 
@@ -62,6 +63,8 @@ public class RegisterFragment extends Fragment {
 //        Check choose photo
         if (aBoolean) {
 //            Non Choose Photo
+            MyAlert myAlert = new MyAlert(getActivity());
+            myAlert.normalDialog("None Choose Photo","Please Choose Photo");
 
         }
     }
