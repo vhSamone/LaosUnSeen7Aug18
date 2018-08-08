@@ -10,14 +10,22 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import masterung.androidthai.in.th.laosunseen.MainActivity;
 import masterung.androidthai.in.th.laosunseen.R;
@@ -28,7 +36,7 @@ public class RegisterFragment extends Fragment {
     //    Explicit
     private Uri uri;
     private ImageView imageView;
-    private boolean aBoolean=true;
+    private boolean aBoolean = true;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -60,14 +68,56 @@ public class RegisterFragment extends Fragment {
 
     private void uploadProcess() {
 
+        EditText nameEditText = getView().findViewById(R.id.edtName);
+        EditText emailEditText = getView().findViewById(R.id.edtEmail);
+        EditText passwordEditText = getView().findViewById(R.id.editPassword);
+
+//        Get Value From editText
+        String nameString = nameEditText.getText().toString().trim();
+        String emailString = emailEditText.getText().toString().trim();
+        String passwordString = passwordEditText.getText().toString().trim();
+
+
 //        Check choose photo
         if (aBoolean) {
 //            Non Choose Photo
             MyAlert myAlert = new MyAlert(getActivity());
-            myAlert.normalDialog("None Choose Photo","Please Choose Photo");
+            myAlert.normalDialog("None Choose Photo", "Please Choose Photo");
+        } else if (nameString.isEmpty() || emailString.isEmpty() || passwordString.isEmpty()) {
+//            Have space
+            MyAlert myAlert = new MyAlert(getActivity());
+            myAlert.normalDialog("Have Sapace", "Please Fill All Every Blank");
+
+        } else {
+//            No space
+            uploadPhotoToFirebase();
+
 
         }
     }
+
+    private void uploadPhotoToFirebase() {
+
+        FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        StorageReference storageReference1 = storageReference.child("Avata/"+ "avata");
+
+        storageReference1.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(getActivity(), "Sucess Upload Photo", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), "Cannot Upload Photo", Toast.LENGTH_SHORT).show();
+                Log.d("8AugV1", "e ==>" + e.toString());
+            }
+        });
+
+
+
+    }//uploadPhotoToFirebase()
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
