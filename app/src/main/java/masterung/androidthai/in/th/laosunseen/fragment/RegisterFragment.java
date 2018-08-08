@@ -27,6 +27,7 @@ public class RegisterFragment extends Fragment {
     //    Explicit
     private Uri uri;
     private ImageView imageView;
+    private boolean aBoolean=true;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -50,9 +51,19 @@ public class RegisterFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.itemUpload) {
+            uploadProcess();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void uploadProcess() {
+
+//        Check choose photo
+        if (aBoolean) {
+//            Non Choose Photo
+
+        }
     }
 
     @Override
@@ -61,6 +72,7 @@ public class RegisterFragment extends Fragment {
         if (resultCode == getActivity().RESULT_OK) {
 
             uri = data.getData();
+            aBoolean = false;
             try {
 
                 Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(uri));
