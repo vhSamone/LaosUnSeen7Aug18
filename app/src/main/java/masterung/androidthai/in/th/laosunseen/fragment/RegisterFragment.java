@@ -31,6 +31,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+
 import masterung.androidthai.in.th.laosunseen.MainActivity;
 import masterung.androidthai.in.th.laosunseen.R;
 import masterung.androidthai.in.th.laosunseen.utility.MyAlert;
@@ -139,7 +141,7 @@ public class RegisterFragment extends Fragment {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(getActivity(), "Sucess Upload Photo", Toast.LENGTH_SHORT).show();
                 findPathURLPhoto();
-
+                createPost();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -153,6 +155,14 @@ public class RegisterFragment extends Fragment {
 
 
     }//uploadPhotoToFirebase()
+
+    private void createPost() {
+
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("Hello");
+        myPostString = stringArrayList.toString();
+        Log.d("9AugV1", "myPost ==>" + myPostString);
+    }
 
     private void findPathURLPhoto() {
 
